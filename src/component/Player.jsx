@@ -1,12 +1,15 @@
-import React from "react";
+import React, { useState } from "react";
 import { BiRepeat } from "react-icons/bi";
 import { IoMdSkipBackward, IoMdSkipForward } from "react-icons/io";
 import { PiShuffleBold } from "react-icons/pi";
 import { FaPlay, FaPause } from "react-icons/fa";
 import { LuHardDriveDownload } from "react-icons/lu";
 import { HiSpeakerWave } from "react-icons/hi2";
+import VolumeController from "./VolumeController";
 
 function Player() {
+  const [isVolumeControllerVisible, setVolumeControllerVisible] =
+    useState(false);
   return (
     <div className="fixed bottom-0 left-0 right-0 bg-[#f5f5f5ff] flex flex-col">
       <input
@@ -46,9 +49,16 @@ function Player() {
         </div>
 
         {/* 3rd div */}
-        <div className="flex items-center justify-end ">
+        <div className="flex items-center justify-end relative">
           <LuHardDriveDownload className="text-gray-700 hover:text-gray-500 text-2xl lg:text-3xl cursor-pointer lg:mr-2" />
-          <HiSpeakerWave className="text-gray-700 hover:text-gray-500 text-2xl lg:text-3xl cursor-pointer lg:mr-2" />
+          <HiSpeakerWave
+            className="text-gray-700 hover:text-gray-500 text-2xl lg:text-3xl cursor-pointer lg:mr-2"
+            onMouseEnter={() => setVolumeControllerVisible(true)}
+            onMouseLeave={() => setVolumeControllerVisible(false)}
+          />
+          <VolumeController
+            isVolumeControllerVisible={isVolumeControllerVisible}
+          />
         </div>
       </div>
     </div>
